@@ -5,7 +5,6 @@ import minimatch from 'minimatch';
 import path from 'path';
 
 import getScreenerSteps from './screener.steps';
-import config from '../config';
 
 const examplePaths = glob.sync('packages/fluentui/docs/src/examples/**/*.tsx', {
   ignore: ['**/index.tsx', '**/*.knobs.tsx', '**/BestPractices/*.tsx', '**/Playground.tsx'],
@@ -29,7 +28,8 @@ const getStateForPath = (examplePath: string) => {
   const rtl = exampleNameWithExtension.endsWith('.rtl.tsx');
   const exampleUrl = _.kebabCase(exampleNameWithoutExtension);
 
-  const pageUrl = `http://${config.server_host}:${config.server_port}/maximize/${exampleUrl}/${rtl}`;
+  const hostUrl = `https://fabricweb.z5.web.core.windows.net${process.env.URL_BASE_PATH}/react-northstar`;
+  const pageUrl = `${hostUrl}/maximize/${exampleUrl}/${rtl}`;
 
   return {
     url: pageUrl,
